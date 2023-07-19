@@ -1,7 +1,8 @@
 {
   "scripts": {
     "dev": "ts-node --esm index.ts",
-    "test": "jest"
+    "test": "jest",
+    "test-watch": "jest --watch"
   },
   "devDependencies": {
     "@types/jest": "^29.5.1",
