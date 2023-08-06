@@ -1,21 +1,27 @@
 function isAnagram(s: string, t: string): boolean {
-  if (s.length !== t.length) return false;
-  const stringsLength = s.length;
+  const sLength = s.length;
+  const tLength = t.length;
 
-  const sCount: { [index: string]: number } = {};
-  const tCount: { [index: string]: number } = {};
+  if (sLength !== tLength) return false;
 
-  for (let i = 0; i < stringsLength; i++) {
-    sCount[s[i]] ? sCount[s[i]]++ : (sCount[s[i]] = 1);
-    tCount[t[i]] ? tCount[t[i]]++ : (tCount[t[i]] = 1);
+  const sMap = new Map<string, number>();
+  const tMap = new Map<string, number>();
+
+  for (let i = 0; i < sLength; i++) {
+    const sVal = s[i];
+    const sFreq = sMap.get(sVal);
+    if (sFreq) sMap.set(sVal, sFreq + 1);
+    else sMap.set(sVal, 1);
+
+    const tVal = t[i];
+    const tFreq = tMap.get(tVal);
+    if (tFreq) tMap.set(tVal, tFreq + 1);
+    else tMap.set(tVal, 1);
   }
 
-  let sCharFrequencies = Object.keys(sCount);
-  for (let i = 0; i < stringsLength; i++) {
-    const sCharFreq = sCount[sCharFrequencies[i]];
-    const tCharFreq = tCount[sCharFrequencies[i]];
-
-    if (sCharFreq !== tCharFreq) return false;
+  for (const [s, sVal] of sMap) {
+    const tVal = tMap.get(s);
+    if (sVal !== tVal) return false;
   }
 
   return true;
