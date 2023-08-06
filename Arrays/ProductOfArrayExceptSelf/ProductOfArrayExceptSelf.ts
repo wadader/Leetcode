@@ -1,27 +1,26 @@
-export function productExceptSelf(nums: number[]): number[] {
-  const numsArrLength = nums.length;
-  const answer: number[] = [];
-  let leftProduct;
-  let rightProduct;
-  const productsFromRight: number[] = [];
-  const productsFromLeft: number[] = [];
+function productExceptSelf(nums: number[]): number[] {
+  const numsLength = nums.length;
 
-  productsFromLeft[0] = 1;
-  productsFromRight[numsArrLength - 1] = 1;
+  const productsToLeft = [1, nums[0]];
 
-  for (let i = 1; i < numsArrLength; i++) {
-    leftProduct = nums[i - 1] * productsFromLeft[i - 1];
-    productsFromLeft.push(leftProduct);
+  for (let i = 2; i < numsLength; i++) {
+    productsToLeft[i] = nums[i - 1] * productsToLeft[i - 1];
   }
 
-  for (let i = numsArrLength - 2; i >= 0; i--) {
-    rightProduct = nums[i + 1] * productsFromRight[i + 1];
-    productsFromRight[i] = rightProduct;
+  const productsToRight = [];
+  productsToRight[numsLength - 1] = 1;
+  productsToRight[numsLength - 2] = nums[numsLength - 1];
+
+  for (let i = numsLength - 3; i >= 0; i--) {
+    productsToRight[i] = nums[i + 1] * productsToRight[i + 1];
   }
 
-  for (let i = 0; i < numsArrLength; i++) {
-    answer.push(productsFromLeft[i] * productsFromRight[i]);
+  const productsArr = [];
+  for (let i = 0; i < numsLength; i++) {
+    productsArr[i] = productsToRight[i] * productsToLeft[i];
   }
 
-  return answer;
+  return productsArr;
 }
+
+export default productExceptSelf;
