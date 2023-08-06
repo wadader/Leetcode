@@ -10,7 +10,6 @@ describe.only("is Anagram", () => {
     expect(isAnagram("rat", "car")).toBe(false);
     expect(isAnagram("polka", "dot")).toBe(false);
     expect(isAnagram("king", "kingg")).toBe(false);
-
-
+    expect(isAnagram("aacc", "ccac")).toBe(false);
   });
 });
