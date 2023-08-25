@@ -1,30 +1,16 @@
 function generateParenthesis(n: number): string[] {
-  /*
-      create all possible valid combinations
-      at each 
-  */
-  const allCombos: string[] = [];
+  let allPars: string[] = [];
 
-  function recurse(openParens: number, closedParens: number, combo: string) {
-    if (openParens === 0 && closedParens === 0) {
-      allCombos.push(combo);
-      return;
-    }
+  function genP(open: number, closed: number, currentPars: string) {
+    if (open === closed && closed === n) return allPars.push(currentPars);
 
-    // if there are open parens to close
-    if (openParens < closedParens) {
-      recurse(openParens, closedParens - 1, combo + ")");
-    }
+    if (open > closed) genP(open, closed + 1, currentPars + ")");
 
-    // if there are open parens left to use
-    if (openParens > 0) {
-      recurse(openParens - 1, closedParens, combo + "(");
-    }
+    if (open < n) genP(open + 1, closed, currentPars + "(");
   }
 
-  recurse(n, n, "");
-
-  return allCombos;
+  genP(0, 0, "");
+  return allPars;
 }
 
 export default generateParenthesis;
