@@ -1,4 +1,6 @@
-import binarySearch from "./binarySearch"; // Assuming binarySearch is exported from binarySearch.ts
+// import binarySearch from "./binarySearch"; // Assuming binarySearch is exported from binarySearch.ts
+
+import binarySearch from "./binarySearchRecursive";
 
 describe("binarySearch", () => {
   it("returns the index of the target if it exists in the array", () => {
