@@ -3,25 +3,37 @@
  */
 function setZeroes(matrix: number[][]): void {
   const matrixLength = matrix.length;
-  let rowZeros: Map<number, true> = new Map<number, true>();
-  let colZeros: Map<number, true> = new Map<number, true>();
 
-  for (let i = 0; i < matrixLength; i++) {
+  let shouldZeroFirstRow = false;
+
+  matrix[0].forEach((val) => {
+    if (val === 0) shouldZeroFirstRow = true;
+  });
+
+  for (let i = 1; i < matrixLength; i++) {
     const rowLength = matrix[i].length;
     for (let j = 0; j < rowLength; j++) {
       if (matrix[i][j] === 0) {
-        rowZeros.set(i, true);
-        colZeros.set(j, true);
+        matrix[0][j] = 0;
+        matrix[i][0] = 0;
       }
     }
   }
 
-  for (let i = 0; i < matrixLength; i++) {
+  for (let i = 1; i < matrixLength; i++) {
     const rowLength = matrix[i].length;
-    for (let j = 0; j < rowLength; j++) {
-      let isInZeroRowOrCol = rowZeros.get(i) || colZeros.get(j);
+    for (let j = 1; j < rowLength; j++) {
+      let isInZeroRowOrCol = matrix[i][0] === 0 || matrix[0][j] === 0;
       if (isInZeroRowOrCol) matrix[i][j] = 0;
     }
+  }
+
+  if (matrix[0][0] === 0) {
+    matrix.forEach((val) => (val[0] = 0));
+  }
+
+  if (shouldZeroFirstRow) {
+    matrix[0].forEach((val, index) => (matrix[0][index] = 0));
   }
 }
 

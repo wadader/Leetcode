@@ -30,5 +30,23 @@ describe("setZeroes", () => {
         [0, 0, 0, 0],
       ]);
     }
+    {
+      const input = [
+        [0, 1, 2, 0],
+        [3, 4, 5, 2],
+        [1, 3, 1, 5],
+      ];
+      setZeroes(input);
+      expect(input).toStrictEqual([
+        [0, 0, 0, 0],
+        [0, 4, 5, 0],
+        [0, 3, 1, 0],
+      ]);
+    }
+    {
+      const input = [[1, 0]];
+      setZeroes(input);
+      expect(input).toStrictEqual([[0, 0]]);
+    }
   });
 });
