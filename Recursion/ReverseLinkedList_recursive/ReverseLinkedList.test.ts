@@ -1,7 +1,7 @@
 import reverseList, { ListNode } from "./ReverseLinkedList";
 
 describe("reverseList", () => {
-  it("should reverse a linked list", () => {
+  it("should reverse a linked list recursively", () => {
     const n3 = new ListNode(3);
     const n2 = new ListNode(2, n3);
     const n1 = new ListNode(1, n2);
